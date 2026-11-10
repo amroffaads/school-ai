@@ -1,0 +1,170 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="ai.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>الذكاء الاصطناعي</title>
+    
+    <style>
+        html {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            direction: rtl; /* اتجاه النص من اليمين لليسار */
+            background: linear-gradient(to bottom, #f4f6f9, #e8edf2);
+            font-size: 18pt;
+            font-family: 'Cairo', Tahoma, Arial, sans-serif;
+            width: 100%;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        form {
+            width: 100%;
+            min-height: 100vh;
+        }
+        table {
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            background-color: #19c9c3 !important;
+            color: white;
+            padding: 15px;
+            margin: 0;
+            font-size: 32px;
+            letter-spacing: 1px;
+        }
+        .mpHeader {
+            width: 100%;
+            height: 160px;
+            text-align: center;
+            border: 1px solid silver;
+        }
+        .mpMenu {
+            text-align: center;
+            font-size: 14pt;
+            height: 20px;
+            width: 100%;
+            border: 1px solid silver;
+        }
+        .mpMain {
+            height: 100%;
+            width: 100%;
+            border: 1px solid silver;
+            vertical-align: top;
+        }
+        .mpTable {
+            border: 1px solid silver;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom, #f4f6f9, #e8edf2);
+        }
+        .mpH1 { text-align: center; color: #000000; }
+        .aiHeader {
+            border: 1px solid silver;
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+        }
+        .aiHeader .mpH1 {
+            background-color: transparent !important;
+            color: #ffffff;
+            text-shadow: 1px 1px 8px #06131f, 0 0 20px rgba(3, 12, 20, .8);
+            letter-spacing: 8px;
+        }
+        .mpP { text-align: center; }
+        .clock {
+            text-align: center !important;
+            color: #0026ff !important;
+            background-color: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            font-weight: bold !important;
+            font-size: 18pt !important;
+        }
+        .contactFooter {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+        .contactFooter a {
+            display: inline-block;
+            position: relative;
+            z-index: 11;
+            pointer-events: auto;
+        }
+    </style>
+
+    <script>
+        function myTimer() {
+            // وظيفة لتحديد التاريخ والوقت
+            var d = new Date();
+            var t1 = d.toLocaleDateString(); // التاريخ
+            var t2 = d.toLocaleTimeString(); // الوقت
+            var t = t1 + "<br />" + t2;
+            document.getElementById("myClock").innerHTML = t;
+        }
+        setInterval("myTimer()", 1000);
+    </script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <table class="mpTable">
+        <tr class="mpHeader" id="Top">
+            <td style="width:15%; text-align: center; border: 1px solid silver;">
+                <%= loginMsg %>
+            </td>
+            <td class="aiHeader" style="width:70%; background-image:url('<%= ResolveUrl("~/pics/ai-header.jpg") %>');">
+                <h1 class="mpH1">AI</h1>
+            </td>
+            <td style="width:15%; border: 1px solid silver;">
+                <h3 class="clock" id="myClock"></h3>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="mpMenu" colspan="3">
+                [<a href="main page.aspx">الذكاء الاصطناعي</a>]
+                [<a href="WebForm1.aspx">نموذج التسجيل</a>]
+                <%-- التحقق إذا كان المستخدم مسجلاً وليس "ضيف" --%>
+              
+                [<a href="AiTable.aspx">معلومات الذكاء الاصطناعي</a>]
+                [<a href="LoginAdmin.aspx">دخول المسؤول</a>]
+            </td>
+        </tr>
+
+        <tr>
+            <td class="mpMain" colspan="3">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+
+        <tr class="mpMenu">
+            <td style="width:15%;"></td>
+            <td class="contactFooter" style="width:70%;">
+                <a href="mailto:amroffaads@gmail.com"
+                    onclick="window.location.href='mailto:amroffaads@gmail.com'; return false;">
+                    تم بناء الموقع بواسطة عمرو - للتواصل: <span dir="ltr">amroffaads@gmail.com</span>
+                </a>
+            </td>
+            <td style="width: 15%; text-align:center; direction: rtl;">
+                أنت الزائر رقم:
+                <%= Application["counter"] %>
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>
